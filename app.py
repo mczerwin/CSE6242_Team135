@@ -3,12 +3,19 @@ from PIL import Image
 import os
 import numpy as np
 import urllib.request
-
+import pickle
+from torchvision import transforms as T
+import torchvision.models as models
+import torch
 
 @st.cache
 def load_image(image_file):
     img = np.array(Image.open(image_file))
     return img
+
+
+def load_model(filename):
+    return pickle.load(open(filename, 'rb'))
 
 
 def main():
@@ -60,6 +67,9 @@ def main():
             st.image(img, width=250)
             st.write(np.shape(np.array(img)))
 
+            model = load_model('./eff_net.sav')
+            score = model.predict(img)
+            st.write(f'Predicted Pawpularity: {score}')
             with open(os.path.join("./tempDir/", image_file.name), "wb") as f:
                 try:
                     os.mkdir("./tempDir/", )
