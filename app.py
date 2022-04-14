@@ -48,14 +48,12 @@ def main():
         ''',
         unsafe_allow_html=True,
     )
-    st.sidebar.title('CSE6242 DVA Project 2022 Spring Team #135')
-    st.sidebar.subheader('*customize later: Sidebar subheader')
+    st.sidebar.title('CSE6242 DVA Project 2022 Spring Team #135 PetFinder')
     menu = ["Image", "Dataset", "DocumentFiles", "About"]
     choice = st.sidebar.selectbox("Menu", menu)
 
     if choice == "Image":
         st.subheader("Image")
-        # if we want we can customize the sidebard format under choice=="Image", if needed
         st.markdown(
             """
             <style>
@@ -77,7 +75,7 @@ def main():
 
             upload_image(image_file, 'uploads')
 
-            # Write some metadata about the image - sanity check that it is uploaded TODO delete this in code clean up
+            # Write some metadata about the image - sanity check that it is uploaded
             file_details = {"filename": image_file.name, "file_type": image_file.type, "filesize": image_file.size}
             st.write(file_details)
             img_np = load_image(image_file, 'np')
@@ -95,22 +93,6 @@ def main():
 
             for score in scores:
                 st.write(f'Predicted Pawpularity: {float(score[0][0]):.2f}')
-
-
-        # else:
-        #     # optional to show a demo picture here, if needed
-        #     urllib.request.urlretrieve(
-        #         'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Cat_poster_1.jpg/520px-Cat_poster_1.jpg',
-        #         "gfg.png")
-
-        #     img = Image.open("gfg.png")
-        #     st.image(img, width=250)
-        #     st.write(np.shape(np.array(img)))
-
-        # st.sidebar.markdown('---')
-        # num_inputbox = st.sidebar.number_input('Numeric parameter input box if needed', value=2, min_value=1)
-        # st.sidebar.markdown('---')
-        # float_slider = st.sidebar.slider('Float parameter slider if needed', min_value=0.0, max_value=1.0, value=0.5)
 
 
 #TODO possibly add documentation if we keep this about section
@@ -138,14 +120,7 @@ def main():
             - [Youtube](https://www.youtube.com/watch?v=ObWSZ4rKUE0)
             '''
         )
-        st.video('https://www.youtube.com/watch?v=ouzwOd-TbRo')
 
-
-    # elif choice == "Dataset":
-    #     st.markdown("Dataset")
-
-    # elif choice == "DocumentFiles":
-    #     st.markdown("DocumentFiles")
 
 
 if __name__ == '__main__':
