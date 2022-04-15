@@ -1,6 +1,5 @@
 # This file may be used to create an environment using:
-<<<<<<< HEAD
-# $ conda create ====name <env> ====file <this file>
+# $ conda create ==name <env> ==file <this file>
 # platform: osx==64
 blas==1.0-mkl
 bottleneck==1.3.2-py39he3068b8_1
