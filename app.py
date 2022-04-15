@@ -98,7 +98,7 @@ def main():
             df = pd.read_csv('./train.csv')
             fig, ax = plt.subplots()
             ax.hist(df['Pawpularity'], bins=5)
-            ax.axvline(x=25,color="r", linestyle='dashed', linewidth = 3, label="Your Score!")
+            ax.axvline(x=float(score[0][0]),color="r", linestyle='dashed', linewidth = 3, label="Your Score!")
             ax.set_title("Distribution of Pawpularity")
             ax.set_xlabel("Pawpularity", fontsize=12, color = "black")
             ax.set_ylabel("Number of Uploads", fontsize=12, color="black")
