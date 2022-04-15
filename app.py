@@ -97,7 +97,7 @@ def main():
 
 #TODO possibly add documentation if we keep this about section
     elif choice == "About":
-        st.markdown("In this application, we are user ***deep learning*** to...")
+        st.markdown("In this application, we are using ***deep learning*** to...")
         # if we want we can customize the sidebard format under choice=="About", if needed
         st.markdown(
             """
