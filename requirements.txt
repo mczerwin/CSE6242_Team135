@@ -6,4 +6,3 @@ torchvision
 numpy
 pandas
 matplotlib
-pickle
