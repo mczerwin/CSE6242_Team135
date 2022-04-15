@@ -8,6 +8,8 @@ from torchvision import transforms as T
 import torchvision.models as models
 import torch
 from dataSet import CustomDataset
+import matplotlib.pyplot as plt
+import pandas as pd
 
 dummy=70
 
@@ -90,10 +92,18 @@ def main():
             for input in img:
                 scores.append(model(input))
          
-
             for score in scores:
                 st.write(f'Predicted Pawpularity: {float(score[0][0]):.2f}')
-
+            ##histogram of train scores w/ uploaded picture score## JS 4/14
+            df = pd.read_csv('./train.csv')
+            fig, ax = plt.subplots()
+            ax.hist(df['Pawpularity'], bins=5)
+            ax.axvline(x=25,color="r", linestyle='dashed', linewidth = 3, label="Your Score!")
+            ax.set_title("Distribution of Pawpularity")
+            ax.set_xlabel("Pawpularity", fontsize=12, color = "black")
+            ax.set_ylabel("Number of Uploads", fontsize=12, color="black")
+            ax.legend()
+            st.pyplot(fig)
 
 #TODO possibly add documentation if we keep this about section
     elif choice == "About":
