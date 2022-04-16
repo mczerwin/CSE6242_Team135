@@ -1,0 +1,9 @@
+dataSet
+matplotlib
+numpy
+pandas
+pillow
+seaborn
+streamlit
+torch
+torchvision
