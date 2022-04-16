@@ -107,7 +107,6 @@ def main():
 
 #TODO possibly add documentation if we keep this about section
     elif choice == "About":
-        st.markdown("In this application, we are using ***deep learning*** to...")
         # if we want we can customize the sidebard format under choice=="About", if needed
         st.markdown(
             """
@@ -125,9 +124,21 @@ def main():
         )
         st.markdown(
             '''
-            about this app section, use markdown rich text here\n
+            ### What we are trying to do:
+            Using modern computer vision techniques, our goal is to create a website that allows users upload
+            photos of their pets and determine how popular the pet’s post will be, in addition to providing useful
+            feedback on how they could improve the photos. Ideally, this tool would help increase the quality of
+            pet adoption posts, resulting in more forever homes and less euthanized animals.
+            
+            ### Why do we do this:
+            According to the American Society for the Prevention of Cruelty to Animals (ASPCA), there are
+            approximately 920,000 cats and dogs are euthanized in shelters every year. These pets typically have
+            online posts made in order to find an appropriate home yet go unnoticed. [PetFinder](https://www.petfinder.com/) is a pet adoption
+            website that has recorded the pictures of cats and dogs up for adoption, with each photo containing
+            an associated popularity score of the post, which is based upon each pet’s page view statistics. The
+            problem with calculating each post’s popularity this way is that it is purely historical and does not
+            provide users with any information.
 
-            - [Youtube](https://www.youtube.com/watch?v=ObWSZ4rKUE0)
             '''
         )
 
