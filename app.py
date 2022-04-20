@@ -124,7 +124,6 @@ def main():
             img_np = load_image(image_file, "np")
             st.image(img_np,width=200)
             # st.write(np.shape(np.array(img_np)))
-        with row1_2:
             # data
             img = load_image(image_file, "tensor")
 
@@ -157,20 +156,17 @@ def main():
             blur = int(torch.round(blur_scores))
             occlusion = int(torch.round(occlusion_scores))
             face = int(torch.round(face_scores))
+            warning_message(blur, occlusion, face)
+        with row1_2:
 
             df = pd.read_csv("./train.csv")
             paw_arr = np.array(df["Pawpularity"])
             paw_per = percentileofscore(paw_arr, pawpularity)
 
             paw_txt = f"""<p style="font-family:sans-serif><div id="d1"><span style="font-size:32px;color:#0ABAB5">{pawpularity:.2f}</span><span style="font-size: 20px"> is your predicted Pawpularity score </span></div> </p>
-                <p style="font-family:sans-serif"> <div id="d2"> <span style="font-size: 20px"> It's in the </span><span style="font-size: 32px; color:#0ABAB5">{int(paw_per)}% </span><span style="font-size: 20px">percentile of images</span></div></p>
+                <p style="font-family:sans-serif"> <div id="d2"> <span style="font-size: 20px"> It's more pawpular than </span><span style="font-size: 32px; color:#0ABAB5">{int(paw_per)}% </span><span style="font-size: 20px">of all our training images</span></div></p>
                 """
             st.markdown(paw_txt, unsafe_allow_html=True)
-
-            warning_message(blur, occlusion, face)
-
-        row2_spacer1, row2_1, row2_spacer2  = st.columns((0.25, 0.5, 0.25))
-        with row2_1:
             fig, ax = plt.subplots(figsize=(10,2.5))
             ax = sns.kdeplot(x=df["Pawpularity"], shade=True)
             ax.axvline(
@@ -183,6 +179,11 @@ def main():
             ax.set_title("Pawpularity Density")
             ax.legend()
             st.pyplot(fig)
+
+
+
+        # row2_spacer1, row2_1, row2_spacer2  = st.columns((0.25, 0.5, 0.25))
+        # with row2_1:
 
 
         row3_spacer1, row3_1, row3_spacer2 = st.columns((0.25, 0.5, 0.25))
