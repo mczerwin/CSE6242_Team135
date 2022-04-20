@@ -167,7 +167,7 @@ def main():
                 <p style="font-family:sans-serif"> <div id="d2"> <span style="font-size: 20px"> It's more pawpular than </span><span style="font-size: 32px; color:#0ABAB5">{int(paw_per)}% </span><span style="font-size: 20px">of all our training images</span></div></p>
                 """
             st.markdown(paw_txt, unsafe_allow_html=True)
-            fig, ax = plt.subplots(figsize=(10,2.5))
+            fig, ax = plt.subplots(figsize=(10,4))
             ax = sns.kdeplot(x=df["Pawpularity"], shade=True)
             ax.axvline(
                 x=float(pawpularity),
