@@ -122,7 +122,7 @@ def main():
         with row1_1:
             # st.write(file_details)
             img_np = load_image(image_file, "np")
-            st.image(img_np,width=250)
+            st.image(img_np,width=200)
             # st.write(np.shape(np.array(img_np)))
         with row1_2:
             # data
