@@ -60,7 +60,7 @@ def warning_message(blur, occlusion, face):
             st.markdown(text, unsafe_allow_html=True)
 
     else:
-        text = '<span style="font-size: 20px; color:#81d8d0">🎉There appear to be no problems with your image</span>'
+        text = '<span style="font-size: 20px; color:#0ABAB5">🎉There appear to be no problems with your image</span>'
         st.markdown(text, unsafe_allow_html=True)
 
 
@@ -98,7 +98,7 @@ def main():
     row0_spacer1, row0_1, row0_spacer2 = st.columns((0.25, 0.5, 0.25))
     with row0_1:
         st.title("""Predict Your Pet's Pawpularity!""")
-        image_file = st.file_uploader("Upload an image of you pet", type=["jpg", "jpeg", "png"])
+        image_file = st.file_uploader("Upload an image of your pet", type=["jpg", "jpeg", "png"])
 
     if image_file is not None:
 
@@ -122,7 +122,7 @@ def main():
         with row1_1:
             # st.write(file_details)
             img_np = load_image(image_file, "np")
-            st.image(img_np, width=250)
+            st.image(img_np,width=250)
             # st.write(np.shape(np.array(img_np)))
         with row1_2:
             # data
@@ -162,8 +162,8 @@ def main():
             paw_arr = np.array(df["Pawpularity"])
             paw_per = percentileofscore(paw_arr, pawpularity)
 
-            paw_txt = f"""<p style="font-family:sans-serif><div id="d1"><span style="font-size:32px;color:#81d8d0">{pawpularity:.2f}</span><span style="font-size: 20px; color:#D3D3D3"> is your predicted Pawpularity score </span></div> </p>
-                <p style="font-family:sans-serif"> <div id="d2"> <span style="font-size: 20px; color:#D3D3D3"> It's in the </span><span style="font-size: 32px; color:#81d8d0">{int(paw_per)}% </span><span style="font-size: 20px; color:#D3D3D3">percentile of images</span></div></p>
+            paw_txt = f"""<p style="font-family:sans-serif><div id="d1"><span style="font-size:32px;color:#0ABAB5">{pawpularity:.2f}</span><span style="font-size: 20px; color:#D3D3D3"> is your predicted Pawpularity score </span></div> </p>
+                <p style="font-family:sans-serif"> <div id="d2"> <span style="font-size: 20px; color:#D3D3D3"> It's in the </span><span style="font-size: 32px; color:#0ABAB5">{int(paw_per)}% </span><span style="font-size: 20px; color:#D3D3D3">percentile of images</span></div></p>
                 """
             st.markdown(paw_txt, unsafe_allow_html=True)
 
