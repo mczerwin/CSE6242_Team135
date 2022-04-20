@@ -90,7 +90,7 @@ def generate_images(df, score, samples):
         if idx == samples:
             break
 
-    st.image(imgList, width=200)
+    st.image(imgList, width=280)
 
 
 def main():
