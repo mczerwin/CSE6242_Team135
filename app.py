@@ -48,20 +48,20 @@ def warning_message(blur, occlusion, face):
     if blur == 1 or occlusion == 1 or face == 0:
 
         if blur == 1:
-            text = '<span style="color:Red">Warning: </span> your image appears blurry, you may want to consider a different image'
+            text = '<span style="font-size: 20px; color:#D3D3D3">❗Your image appears blurry </span>'
             st.markdown(text, unsafe_allow_html=True)
 
         if occlusion == 1:
-            text = '<span style="color:Red">Warning: </span> there appears to be some occlusion in your image, you may want to consider a different one'
+            text = '<span style="font-size: 20px; color:#D3D3D3">❗️Your pet appears to be partially blocked by undesirable item </span>'
             st.markdown(text, unsafe_allow_html=True)
 
         if face == 0:
-            text = '<span style="color:Red">Warning: </span> please confirm a face is visible in the image'
+            text = '<span style="font-size: 20px; color:#D3D3D3">❗Please confirm a face is visible in the image</span>'
             st.markdown(text, unsafe_allow_html=True)
 
     else:
-        text = "There appear to be no problems with your image"
-        st.write(text)
+        text = '<span style="font-size: 20px; color:#81d8d0">🎉There appear to be no problems with your image</span>'
+        st.markdown(text, unsafe_allow_html=True)
 
 
 def generate_images(df, score, samples):
@@ -90,7 +90,7 @@ def generate_images(df, score, samples):
         if idx == samples:
             break
 
-    st.image(imgList, width=250)
+    st.image(imgList, width=200)
 
 
 def main():
@@ -98,20 +98,27 @@ def main():
     row0_spacer1, row0_1, row0_spacer2 = st.columns((0.25, 0.5, 0.25))
     with row0_1:
         st.title("""Predict Your Pet's Pawpularity!""")
-        image_file = st.file_uploader("Upload Images", type=["jpg", "jpeg", "png"])
+        image_file = st.file_uploader("Upload an image of you pet", type=["jpg", "jpeg", "png"])
 
     if image_file is not None:
 
         # Write some metadata about the image - sanity check that it is uploaded
-        file_details = {
-            "filename": image_file.name,
-            "file_type": image_file.type,
-            "filesize": image_file.size,
-        }
+        # file_details = {
+        #     "filename": image_file.name,
+        #     "file_type": image_file.type,
+        #     "filesize": image_file.size,
+        # }
+        row01_spacer1, row01_1  = st.columns(
+            (0.25, 0.75)
+        )
+        with row01_1:
+            st.subheader("Your Pawpularity!")
 
         row1_spacer1, row1_1, row1_2, row1_spacer2 = st.columns(
-            (0.25, 0.25, 0.25, 0.25)
+            (0.25, 0.2, 0.3, 0.25)
         )
+
+
         with row1_1:
             # st.write(file_details)
             img_np = load_image(image_file, "np")
@@ -151,25 +158,20 @@ def main():
             occlusion = int(torch.round(occlusion_scores))
             face = int(torch.round(face_scores))
 
-            warning_message(blur, occlusion, face)
             df = pd.read_csv("./train.csv")
             paw_arr = np.array(df["Pawpularity"])
             paw_per = percentileofscore(paw_arr, pawpularity)
 
-            # st.write(
-            #     f"Predicted Pawpularity: {pawpularity:.2f} which is in the {int(paw_per)}th percentile of images"
-            # )
-            paw_txt = f"""
-                <p style="font-family:sans-serif; font-size: 22px;">
-                Predicted Pawpularity: {pawpularity:.2f} which is in 
-                the {int(paw_per)} percentile of images</p>
+            paw_txt = f"""<p style="font-family:sans-serif><div id="d1"><span style="font-size:32px;color:#81d8d0">{pawpularity:.2f}</span><span style="font-size: 20px; color:#D3D3D3"> is your predicted Pawpularity score </span></div> </p>
+                <p style="font-family:sans-serif"> <div id="d2"> <span style="font-size: 20px; color:#D3D3D3"> It's in the </span><span style="font-size: 32px; color:#81d8d0">{int(paw_per)}% </span><span style="font-size: 20px; color:#D3D3D3">percentile of images</span></div></p>
                 """
             st.markdown(paw_txt, unsafe_allow_html=True)
 
-        row2_spacer1, row2_1, row2_spacer2 = st.columns((0.25, 0.5, 0.25))
-        with row2_1:
+            warning_message(blur, occlusion, face)
 
-            fig, ax = plt.subplots()
+        row2_spacer1, row2_1, row2_spacer2  = st.columns((0.25, 0.5, 0.25))
+        with row2_1:
+            fig, ax = plt.subplots(figsize=(10,2.5))
             ax = sns.kdeplot(x=df["Pawpularity"], shade=True)
             ax.axvline(
                 x=float(pawpularity),
@@ -181,6 +183,7 @@ def main():
             ax.set_title("Pawpularity Density")
             ax.legend()
             st.pyplot(fig)
+
 
         row3_spacer1, row3_1, row3_spacer2 = st.columns((0.25, 0.5, 0.25))
         with row3_1:
