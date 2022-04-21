@@ -182,7 +182,7 @@ def main():
 
             paw_txt = f""" 
                 <p style="font-family:sans-serif><div id="d1"><span style="font-size: 20px"> 
-                Your predicted Pawpularity score is </span><span style="font-size:32px;color:#0ABAB5">{pawpularity:.2f}!</span></div> </p>
+                Your predicted Pawpularity score is </span><span style="font-size:32px;color:#0ABAB5">{pawpularity:.2f}</span><span style="font-size: 20px">!</span></div> </p>
 
                 """
             st.markdown(paw_txt, unsafe_allow_html=True)
