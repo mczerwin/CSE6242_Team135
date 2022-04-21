@@ -8,7 +8,6 @@ import matplotlib.ticker as mtick
 import seaborn as sns
 import pandas as pd
 from scipy.stats import percentileofscore
-import os
 
 
 st.set_page_config(
@@ -221,10 +220,10 @@ def main():
             (0.25, 0.15, 0.15, 0.2, 0.25)
         )
         with row5_1:
-            uploaded_files = len(
-                [name for name in os.listdir("./uploads") if os.path.isfile(name)]
-            )
-            photo_count = len(df) + uploaded_files
+            # uploaded_files = len(
+            #     [name for name in os.listdir("./uploads") if os.path.isfile(name)]
+            # )
+            photo_count = len(df)
 
             fig, ax = plt.subplots(figsize=(2, 2))
             ax.pie(
@@ -237,9 +236,9 @@ def main():
             avg_pawpularity = round(df["Pawpularity"].mean(), 2)
             show_value(avg_pawpularity, "Avg Pawpularity")
         with row5_3:
-            pct_blur = len(df[df["Blur"] == 1]) / len(df)
-            pct_occlusion = len(df[df["Occlusion"] == 1]) / len(df)
-            pct_no_face = len(df[df["Face"] == 0]) / len(df)
+            pct_blur = len(df[df["Blur"] == 1]) / photo_count
+            pct_occlusion = len(df[df["Occlusion"] == 1]) / photo_count
+            pct_no_face = len(df[df["Face"] == 0]) / photo_count
 
             supp_data = {
                 "Issue": ["Blurry", "Occlusion", "No Face"],
