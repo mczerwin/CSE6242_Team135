@@ -61,7 +61,7 @@ def warning_message(blur, occlusion, face):
             st.markdown(text, unsafe_allow_html=True)
 
     else:
-        text = '<span style="font-size: 20px; color:#0ABAB5">🎉There appear to be no problems with your image</span>'
+        text = '<span style="font-size: 20px; color:#0ABAB5">🎉There appear to be no blur, occlusion, or unclear face with your image</span>'
         st.markdown(text, unsafe_allow_html=True)
 
 
@@ -114,9 +114,16 @@ def main():
     with row0_1:
         st.title("""Predict Your Pet's Pawpularity!""")
         image_file = st.file_uploader(
-            "Upload an image of your pet", type=["jpg", "jpeg", "png"]
+            "Upload an image of your pet to predict it's adoption pawpularity", type=["jpg", "jpeg", "png"]
         )
-
+    if image_file is None:
+        row01_spacer1, row01_1, row01_spacer2 = st.columns((0.25, 0.5, 0.25))
+        with row01_1:
+            intro_txt = f""" 
+                <p style="font-family:sans-serif><div id="d1"><span style="font-size:13px;color:#B2BEB5">Using web traffic data from the pet adoption site PetFinder, we are able to predict how popular a pet's photo will be as an adoption post.</span></div> </p>
+        
+                """
+            st.markdown(intro_txt, unsafe_allow_html=True)
     if image_file is not None:
 
         # Write some metadata about the image - sanity check that it is uploaded
