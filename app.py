@@ -114,7 +114,7 @@ def main():
     with row0_1:
         st.title("""Predict Your Pet's Pawpularity!""")
         image_file = st.file_uploader(
-            "Upload an image of your pet to predict it's adoption pawpularity", type=["jpg", "jpeg", "png"]
+            "Upload an image of your pet to predict its adoption pawpularity", type=["jpg", "jpeg", "png"]
         )
     if image_file is None:
         row01_spacer1, row01_1, row01_spacer2 = st.columns((0.25, 0.5, 0.25))
