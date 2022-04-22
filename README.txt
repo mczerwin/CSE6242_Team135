@@ -1,4 +1,4 @@
-ONTENTS OF THIS FILE
+CONTENTS OF THIS FILE
 ---------------------
  * Description
  * Installation
